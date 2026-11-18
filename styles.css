@@ -68,6 +68,29 @@ h3 { font-size: 1.2rem; }
 .card-body { padding: 20px 22px 24px; }
 .card-body p { margin: 0; color: var(--muted); font-size: .95rem; }
 
+.card[data-cat] { cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.card[data-cat]:hover, .card[data-cat]:focus-visible { transform: translateY(-4px); box-shadow: 0 1px 2px rgba(59,42,30,.06), 0 20px 40px -18px rgba(59,42,30,.45); outline: none; }
+.card[data-cat]:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
+.card .more { display: inline-block; margin-top: 12px; font-weight: 700; font-size: .9rem; color: var(--accent-dark); }
+
+/* Category dialog */
+.cat-dialog { width: min(720px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 0; border: 0; border-radius: var(--radius); background: var(--cream); color: var(--brown); box-shadow: 0 30px 80px -20px rgba(0,0,0,.5); overflow: auto; }
+.cat-dialog::backdrop { background: rgba(40,28,20,.6); backdrop-filter: blur(3px); }
+.cat-img { width: 100%; height: 220px; object-fit: cover; }
+.cat-body { padding: 24px 28px 28px; }
+.cat-intro { color: var(--brown-2); margin: 0 0 20px; }
+.cat-close { position: sticky; top: 12px; float: right; margin: 12px 12px -56px 0; z-index: 1; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--cream); color: var(--brown); font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+.cat-items { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cat-items li { background: #fff; border-radius: 12px; padding: 12px 14px; border: 1px solid var(--sand); }
+.cat-items strong { display: block; }
+.cat-items span { display: block; font-size: .85rem; color: var(--muted); }
+.cat-note { font-size: .85rem; color: var(--muted); margin: 18px 0 0; }
+@media (max-width: 560px) {
+  .cat-items { grid-template-columns: 1fr; }
+  .cat-img { height: 170px; }
+  .cat-body { padding: 20px 18px 22px; }
+}
+
 /* Shop */
 .shop { background: var(--sand); }
 .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }

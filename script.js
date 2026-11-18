@@ -68,3 +68,159 @@ document.getElementById("lang").addEventListener("click", () => {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// ---- Category details (edit these lists to match what's in the shop) ----
+// Each item: [Greek name, English name, Greek note, English note]
+const categories = {
+  nuts: {
+    img: "images/p8.jpg",
+    el: { t: "Ξηροί καρποί", i: "Ωμοί, καβουρδισμένοι ή αλατισμένοι — τους ζυγίζουμε όσους θέλετε." },
+    en: { t: "Nuts", i: "Raw, roasted or salted — weighed out in whatever quantity you like." },
+    items: [
+      ["Αμύγδαλα", "Almonds", "ωμά, καβουρδισμένα, καπνιστά", "raw, roasted, smoked"],
+      ["Κάσιους", "Cashews", "ωμά, ψημένα, αλατισμένα", "raw, roasted, salted"],
+      ["Καρύδια", "Walnuts", "ψίχα", "shelled"],
+      ["Φουντούκια", "Hazelnuts", "ωμά ή καβουρδισμένα", "raw or roasted"],
+      ["Φιστίκια Αιγίνης", "Pistachios", "με ή χωρίς αλάτι", "salted or unsalted"],
+      ["Πεκάν", "Pecans", "", ""],
+      ["Μακαντέμια", "Macadamia", "", ""],
+      ["Καρύδια Βραζιλίας", "Brazil nuts", "", ""],
+      ["Κουκουνάρι", "Pine nuts", "", ""],
+      ["Αράπικα φιστίκια", "Peanuts", "ψημένα, αλατισμένα", "roasted, salted"],
+      ["Πασατέμπος & ηλιόσποροι", "Pumpkin & sunflower seeds", "", ""],
+      ["Στραγάλια", "Roasted chickpeas", "", ""]
+    ]
+  },
+  dry: {
+    img: "images/p11.jpg",
+    el: { t: "Αποξηραμένα φρούτα", i: "Γλυκά, μαλακά και γεμάτα γεύση — ιδανικά για σνακ, γλυκά και πιατέλες." },
+    en: { t: "Dried fruits", i: "Sweet, soft and full of flavour — perfect for snacking, baking and platters." },
+    items: [
+      ["Βερίκοκα", "Apricots", "", ""],
+      ["Χουρμάδες", "Dates", "Medjool & άλλες ποικιλίες", "Medjool & other varieties"],
+      ["Σύκα", "Figs", "", ""],
+      ["Δαμάσκηνα", "Prunes", "", ""],
+      ["Κράνμπερι", "Cranberries", "", ""],
+      ["Μάνγκο", "Mango", "", ""],
+      ["Ανανάς", "Pineapple", "", ""],
+      ["Παπάγια", "Papaya", "", ""],
+      ["Σταφίδες", "Raisins", "μαύρες & ξανθές", "dark & golden"],
+      ["Ακτινίδιο", "Kiwi", "", ""],
+      ["Goji berries", "Goji berries", "", ""],
+      ["Μπανάνα τσιπς", "Banana chips", "", ""]
+    ]
+  },
+  plat: {
+    img: "images/p5.jpg",
+    el: { t: "Πιατέλες", i: "Χειροποίητες πιατέλες με ξηρούς καρπούς, αποξηραμένα φρούτα και λιχουδιές, σε όποιο μέγεθος χρειάζεστε." },
+    en: { t: "Platters", i: "Handmade platters of nuts, dried fruits and treats, in whatever size you need." },
+    items: [
+      ["Μικρή πιατέλα", "Small platter", "για το σπίτι ή μικρή παρέα", "for home or a small group"],
+      ["Μεσαία πιατέλα", "Medium platter", "για πάρτι και γιορτές", "for parties and celebrations"],
+      ["Μεγάλη πιατέλα", "Large platter", "για μεγάλες εκδηλώσεις", "for big events"],
+      ["Ξύλινη τάβλα", "Wooden board", "μακρόστενη παρουσίαση", "long serving board"],
+      ["Βαφτίσια & γάμοι", "Christenings & weddings", "στα χρώματα της εκδήλωσης", "in your event's colours"],
+      ["Εταιρικές εκδηλώσεις", "Corporate events", "κατά παραγγελία", "made to order"]
+    ]
+  },
+  pack: {
+    img: "images/p9.jpg",
+    el: { t: "Πακέτα δώρου", i: "Δώρα που φτιάχνουμε με μεράκι — διαλέξτε έτοιμο ή φτιάξτε το δικό σας." },
+    en: { t: "Gift packages", i: "Gifts made with care — pick a ready one or build your own." },
+    items: [
+      ["Ξύλινο καφάσι δώρου", "Wooden gift crate", "", ""],
+      ["Κουτί δώρου", "Gift box", "σε διάφορα μεγέθη", "in various sizes"],
+      ["Βάζα με ξηρούς καρπούς", "Nut jars", "", ""],
+      ["Χριστουγεννιάτικα δώρα", "Christmas gifts", "", ""],
+      ["Πασχαλινά δώρα", "Easter gifts", "", ""],
+      ["Εταιρικά δώρα", "Corporate gifts", "με την ετικέτα σας", "with your own label"]
+    ]
+  },
+  sweet: {
+    img: "images/p12.jpg",
+    el: { t: "Λιχουδιές", i: "Γλυκές μπουκιές για να συνοδέψουν τον καφέ σας ή να ολοκληρώσουν μια πιατέλα." },
+    en: { t: "Treats", i: "Sweet bites to go with your coffee or finish off a platter." },
+    items: [
+      ["Γεμιστά βερίκοκα & χουρμάδες", "Stuffed apricots & dates", "", ""],
+      ["Ρολά φρούτων", "Fruit rolls", "", ""],
+      ["Καραμελωμένοι ξηροί καρποί", "Caramelised nuts", "", ""],
+      ["Κουφέτα σοκολάτας", "Chocolate dragées", "λευκή, γάλακτος, μαύρη", "white, milk, dark"],
+      ["Αμύγδαλα σε σοκολάτα", "Chocolate-coated almonds", "", ""],
+      ["Φράουλες σε σοκολάτα", "Chocolate strawberries", "", ""]
+    ]
+  },
+  snack: {
+    img: "images/p6.jpg",
+    el: { t: "Σνακ", i: "Τραγανά, αλμυρά και έτοιμα για κάθε στιγμή." },
+    en: { t: "Snacks", i: "Crunchy, savoury and ready for any moment." },
+    items: [
+      ["Κράκερ", "Crackers", "", ""],
+      ["Μείγματα ξηρών καρπών", "Nut mixes", "", ""],
+      ["Μείγμα φοιτητή", "Trail mix", "", ""],
+      ["Αρακάς wasabi", "Wasabi peas", "", ""],
+      ["Καλαμπόκι ψητό", "Corn nuts", "", ""],
+      ["Έτοιμα σακουλάκια", "Ready packs", "για το γραφείο ή το σχολείο", "for work or school"]
+    ]
+  }
+};
+
+const notes = {
+  el: "Η διαθεσιμότητα αλλάζει ανάλογα με την εποχή — ρωτήστε μας για τιμές και ό,τι άλλο ψάχνετε.",
+  en: "Availability changes with the season — ask us for prices and anything else you're looking for."
+};
+const moreText = { el: "Δείτε τις ποικιλίες →", en: "See the selection →" };
+
+const dialog = document.getElementById("cat-dialog");
+const order = ["nuts", "dry", "plat", "pack", "sweet", "snack"];
+let openCat = null;
+
+function renderCat(key) {
+  const c = categories[key], L = current === "en" ? "en" : "el";
+  dialog.querySelector(".cat-img").src = c.img;
+  dialog.querySelector("#cat-title").textContent = c[L].t;
+  dialog.querySelector(".cat-intro").textContent = c[L].i;
+  dialog.querySelector(".cat-note").textContent = notes[L];
+  const ul = dialog.querySelector(".cat-items");
+  ul.innerHTML = "";
+  c.items.forEach(([gr, en, gn, enn]) => {
+    const li = document.createElement("li");
+    const s = document.createElement("strong");
+    s.textContent = L === "en" ? en : gr;
+    li.appendChild(s);
+    const note = L === "en" ? enn : gn;
+    if (note) { const sp = document.createElement("span"); sp.textContent = note; li.appendChild(sp); }
+    ul.appendChild(li);
+  });
+}
+
+function openDialog(key) {
+  openCat = key;
+  renderCat(key);
+  dialog.showModal();
+  dialog.scrollTop = 0;
+}
+
+document.querySelectorAll("#products .card").forEach((card, i) => {
+  const key = order[i];
+  if (!key) return;
+  card.dataset.cat = key;
+  card.tabIndex = 0;
+  card.setAttribute("role", "button");
+  const more = document.createElement("span");
+  more.className = "more";
+  card.querySelector(".card-body").appendChild(more);
+  card.addEventListener("click", () => openDialog(key));
+  card.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDialog(key); }
+  });
+});
+
+function updateMore() {
+  document.querySelectorAll("#products .more").forEach(m => { m.textContent = moreText[current === "en" ? "en" : "el"]; });
+  if (dialog.open && openCat) renderCat(openCat);
+}
+updateMore();
+document.getElementById("lang").addEventListener("click", updateMore);
+
+dialog.querySelector(".cat-close").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
